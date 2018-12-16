@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../../Core/Router.php';
+namespace Enkelad\TestFramework\tests\Core;
 
 use PHPUnit\Framework\TestCase;
+use Enkelad\TestFramework\Core\Router;
 
 final class RouterTest extends TestCase
 {
@@ -34,4 +35,13 @@ final class RouterTest extends TestCase
         $this->assertEquals('actionSecondName', $action_name);
     }
 
+    public function testRemoveQueryStringVariables()
+    {
+        // host.ru/posts/add-new?text=smth&name=ivan
+        $url = $this->router->removeQueryStringVariables('posts/add-new&text=smth&name=ivan');
+        $this->assertEquals('posts/add-new', $url);
+        // host.ru/?text=smth
+        $url = $this->router->removeQueryStringVariables('text=smth');
+        $this->assertEquals('', $url);
+    }
 }
