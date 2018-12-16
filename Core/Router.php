@@ -1,9 +1,31 @@
 <?php
 
+namespace Enkelad\TestFramework\Core;
+
 class Router
 {
     protected $routes = [];
     protected $params = [];
+
+    /**
+     * Get the list of routes
+     *
+     * @return array
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+    
+    /**
+     * Get the currently matched params
+     *
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
 
     /**
      * Add a new route, by converting route string to regexp for flexible
@@ -28,16 +50,6 @@ class Router
         $route = '/^' . $route . '$/';
 
         $this->routes[$route] = $params;
-    }
-
-    /**
-     * Get the list of routes
-     *
-     * @return array of routes
-     */
-    public function getRoutes()
-    {
-        return $this->routes;
     }
 
     /**
@@ -69,9 +81,12 @@ class Router
      */
     public function dispatch($url)
     {
+        $url = $this->removeQueryStringVariables($url);
+
         if ($this->match($url)) {
             $controller_name = $this->params['controller'];
             $controller_name = $this->convertToStudlyCaps($controller_name);
+            $controller_name = "Enkelad\TestFramework\App\Controllers\\$controller_name";
 
             if (class_exists($controller_name)) {
                 $controller = new $controller_name();
@@ -117,12 +132,30 @@ class Router
     }
 
     /**
-     * Get the currently matched params
-     *
-     * @return array
+     * Remove query string variables from an url for matching
+     * an url to routes. Due to sending all requests to 
+     * 'host.ru/index.php?' the question mark before the query string
+     * transforms to an ampersand, so we trim a part of the url after
+     * the first ampersand symbol instead of after the question mark. 
+     * e.g. 
+     * url - http://host.ru/posts?first=smth&second=good
+     * query string - posts&first=smth&second=good
+     * url for matching routes - posts
+     * 
+     * @param string $url
+     * @return string $url
      */
-    public function getParams()
+    public function removeQueryStringVariables($url)
     {
-        return $this->params;
+        if ($url != '') {
+            $parts = explode('&', $url, 2);
+
+            if (strpos($parts[0], '=') === false) {
+                $url = $parts[0];
+            } else {
+                $url = '';
+            }
+        }
+        return $url;
     }
 }
