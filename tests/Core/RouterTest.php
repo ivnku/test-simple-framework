@@ -1,9 +1,9 @@
 <?php
 
-namespace Enkelad\TestFramework\tests\Core;
+namespace TestFramework\tests\Core;
 
 use PHPUnit\Framework\TestCase;
-use Enkelad\TestFramework\Core\Router;
+use TestFramework\Core\Router;
 
 final class RouterTest extends TestCase
 {

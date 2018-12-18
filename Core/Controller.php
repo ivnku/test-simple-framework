@@ -1,6 +1,6 @@
 <?php
 
-namespace Enkelad\TestFramework\Core;
+namespace TestFramework\Core;
 
 abstract class Controller
 {

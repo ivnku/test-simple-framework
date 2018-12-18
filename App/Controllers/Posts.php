@@ -1,8 +1,8 @@
 <?php
 
-namespace Enkelad\TestFramework\App\Controllers;
+namespace TestFramework\App\Controllers;
 
-use Enkelad\TestFramework\Core\Controller;
+use TestFramework\Core\Controller;
 
 /**
  * Controller for the Posts page
