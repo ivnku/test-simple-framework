@@ -1,20 +1,22 @@
 <?php
 
-require_once '../App/Controllers/Posts.php';
-require_once '../Core/Router.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Enkelad\TestFramework\App\Controllers\Posts;
+use Enkelad\TestFramework\Core\Router;
 
 $router = new Router();
 
 $router->add('', ['controller'=>'Home', 'action'=>'index']);
 $router->add('posts', ['controller'=>'Posts', 'action'=>'index']);
-//$router->add('posts/new', ['controller'=>'Posts', 'action'=>'new']);
 $router->add('posts/{action}', ['controller'=>'Posts']);
 $router->add('blog/{controller}/smth/{action}');
-$router->add('blog/{controller}/{id:\d+}/{action}');
+$router->add('{controller}/{id:\d+}/{action}');
 
 
 echo "query string= " . $_SERVER['QUERY_STRING'] . "<br/>";
 $router->dispatch($_SERVER['QUERY_STRING']);
+//$router->removeQueryStringVariables($_SERVER['QUERY_STRING']);
 
 // echo '<pre>';
 // var_dump($router->getRoutes());

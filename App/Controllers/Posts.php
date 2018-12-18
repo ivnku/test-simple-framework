@@ -2,17 +2,19 @@
 
 namespace Enkelad\TestFramework\App\Controllers;
 
+use Enkelad\TestFramework\Core\Controller;
+
 /**
  * Controller for the Posts page
  */
-class Posts
+class Posts extends Controller
 {
     /**
      * Show the index page
      *
      * @return void
      */
-    public function index()
+    public function indexAction()
     {
         echo 'The index page of the Posts controller. <br/>';
         echo '<p>Query string parameters: <pre>' . htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
@@ -23,8 +25,19 @@ class Posts
      *
      * @return void
      */
-    public function addNew()
+    public function addAction()
     {
         echo 'Add new post in the Posts controller.';
+    }
+
+    /**
+     * Show edit page
+     *
+     * @return void
+     */
+    public function editAction()
+    {
+        echo 'Hello from the edit action in the Posts controller';
+        echo '<p>Route params:<pre>' . htmlspecialchars(print_r($this->route_params, true)) . '</pre></p>';
     }
 }

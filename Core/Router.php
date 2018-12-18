@@ -89,7 +89,7 @@ class Router
             $controller_name = "Enkelad\TestFramework\App\Controllers\\$controller_name";
 
             if (class_exists($controller_name)) {
-                $controller = new $controller_name();
+                $controller = new $controller_name($this->params);
                 
                 $action = $this->params['action'];
                 $action = $this->convertToCamelCase($action);
