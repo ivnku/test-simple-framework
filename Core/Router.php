@@ -1,6 +1,6 @@
 <?php
 
-namespace Enkelad\TestFramework\Core;
+namespace TestFramework\Core;
 
 class Router
 {
@@ -86,7 +86,7 @@ class Router
         if ($this->match($url)) {
             $controller_name = $this->params['controller'];
             $controller_name = $this->convertToStudlyCaps($controller_name);
-            $controller_name = "Enkelad\TestFramework\App\Controllers\\$controller_name";
+            $controller_name = $this->getNamespace() . $controller_name;
 
             if (class_exists($controller_name)) {
                 $controller = new $controller_name($this->params);
@@ -157,5 +157,21 @@ class Router
             }
         }
         return $url;
+    }
+
+    /**
+     * Get the right namespace for a controller class. The namespace
+     * defined in the route parameters is added if present.
+     *
+     * @return string
+     */
+    protected function getNamespace()
+    {
+        $namespace = 'TestFramework\App\Controllers\\';
+        if (array_key_exists('namespace', $this->params)) {
+            $namespace .= $this->params['namespace'] . '\\';
+        }
+
+        return $namespace;
     }
 }

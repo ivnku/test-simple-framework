@@ -2,16 +2,17 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Enkelad\TestFramework\App\Controllers\Posts;
-use Enkelad\TestFramework\Core\Router;
+use TestFramework\App\Controllers\Posts;
+use TestFramework\Core\Router;
 
 $router = new Router();
 
-$router->add('', ['controller'=>'Home', 'action'=>'index']);
-$router->add('posts', ['controller'=>'Posts', 'action'=>'index']);
-$router->add('posts/{action}', ['controller'=>'Posts']);
+$router->add('', ['controller' => 'Home', 'action' => 'index']);
+$router->add('posts', ['controller' => 'Posts', 'action' => 'index']);
+$router->add('posts/{action}', ['controller' => 'Posts']);
 $router->add('blog/{controller}/smth/{action}');
 $router->add('{controller}/{id:\d+}/{action}');
+$router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
 
 
 echo "query string= " . $_SERVER['QUERY_STRING'] . "<br/>";
