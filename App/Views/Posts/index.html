@@ -4,5 +4,12 @@
 
 {% block body %}
     <h1>Posts</h1>
-    <p>This is the index method in the Posts controller.</p>
+    {% for post in posts %}
+        <h2>{{post.title}}</h2>
+        <div>
+            <p>{{post.content}}</p>
+            <p><b>{{post.created_at}}</b></p>
+        </div>
+    {% endfor %}
+    <!-- <p>This is the index method in the Posts controller.</p> -->
 {% endblock %}

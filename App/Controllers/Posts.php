@@ -4,6 +4,7 @@ namespace TestFramework\App\Controllers;
 
 use TestFramework\Core\Controller;
 use TestFramework\Core\View;
+use TestFramework\App\Models\Post;
 
 /**
  * Controller for the Posts page
@@ -17,8 +18,8 @@ class Posts extends Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Posts/index.html');
-        echo '<p>Query string parameters: <pre>' . htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
+        $posts = Post::getAll();
+        View::renderTemplate('Posts/index.html', ['posts'=>$posts]);
     }
 
     /**
