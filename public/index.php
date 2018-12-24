@@ -4,6 +4,10 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use TestFramework\Core\Router;
 
+
+set_error_handler('TestFramework\Core\Error::errorHandler');
+set_exception_handler('TestFramework\Core\Error::exceptionHandler');
+
 $router = new Router();
 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);

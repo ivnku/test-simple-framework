@@ -2,6 +2,9 @@
 
 namespace TestFramework\Core;
 
+use TheSeer\Tokenizer\Exception;
+
+
 abstract class Controller
 {
     protected $route_params = [];
@@ -21,7 +24,7 @@ abstract class Controller
                 $this->after();
             }
         } else {
-            echo "Method $method not found in the controller" . get_class($this);
+            throw new \Exception("Method $method not found in the controller" . get_class($this));
         }
     }
 
