@@ -12,11 +12,6 @@ abstract class Model
         static $db = null;
 
         if ($db === null) {
-            $host     = 'localhost';
-            $dbname   = 'test_app_db';
-            $username = 'test_app_admin';
-            $password = 'tstap963@';
-
             try {                
                 $dsn = "mysql:host=" . Cfg::DB_HOST . ";dbname=" . Cfg::DB_NAME . ";charset=utf8"; 
                 $db = new PDO($dsn, Cfg::DB_USER, Cfg::DB_PASS);

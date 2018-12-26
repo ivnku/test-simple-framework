@@ -2,8 +2,6 @@
 
 namespace TestFramework\Core;
 
-use PHPUnit\Framework\Constraint\Exception;
-
 
 class View
 {
@@ -22,7 +20,7 @@ class View
         if (is_readable($file)) {
             require $file;
         } else {
-            throw new Exception("$file not found.");
+            throw new \Exception("$file not found.");
         }
     }
 

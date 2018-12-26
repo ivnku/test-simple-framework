@@ -2,8 +2,6 @@
 
 namespace TestFramework\Core;
 
-use TheSeer\Tokenizer\Exception;
-
 
 abstract class Controller
 {
@@ -24,7 +22,7 @@ abstract class Controller
                 $this->after();
             }
         } else {
-            throw new \Exception("Method $method not found in the controller" . get_class($this));
+            throw new \Exception("Method $method not found in the controller " . get_class($this));
         }
     }
 
